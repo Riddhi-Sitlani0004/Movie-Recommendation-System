@@ -18,6 +18,11 @@ movies.head(1)
 movies = movies[['movie_id', 'title', 'overview', 'genres', 'keywords', 'cast', 'crew']]
 movies.head(1)
 
+def convert(obj):
+    L = []
+    for i in ast.literal_eval(obj):
+        L.append(i['name'])
+    return L
 movies['genres'] = movies['genres'].apply(convert)
 movies['genres']
 
@@ -53,7 +58,3 @@ print(get_recommendations('The Dark Knight Rises'))
 import pickle
 with open('movie_data.pkl', 'wb') as file:
     pickle.dump((movies, cosine_sim), file)
-
-## pandas==2.2.2
-## Requests==2.32.3
-## streamlit==1.35.0
